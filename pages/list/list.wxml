@@ -1,0 +1,10 @@
+<view class="home-view-line"></view>
+<block wx:for="{{list}}" wx:key="articleList">
+<navigator url="" hover-class="navigator-hover">
+    <!--<image src="{{item.avatar}}" class="pic"></image>-->
+    <view class="right">
+      <text class="content-overflow">{{item.content}}</text>
+    </view>
+</navigator>
+<view class="home-view-line"></view>
+</block>

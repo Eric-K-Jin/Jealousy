@@ -1,0 +1,4 @@
+<!--upload.wxml-->
+<view class="userinfo">
+<image src="{{src}}" class="profile" catchtap="chooseImageTap" bindload="imageLoad" style="width:{{imgwidth}}px; height:{{imgheight }}px;"></image>
+</view>
