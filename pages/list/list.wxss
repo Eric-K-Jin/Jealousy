@@ -1,15 +1,16 @@
 /* list.wxss */
-.home-view-line{
- width: 100%;
- height: 6px;
- margin-top: 5px;
- background-color: gainsboro;
-}
-
 .content-overflow {
   display: -webkit-box !important;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
+}
+
+.list-border {
+  border-top: 2px solid #f39808;
+  border-radius: 8px;
+  background-color: white;
+  margin: 5px 10px 10px 10px;
+  padding: 10px
 }

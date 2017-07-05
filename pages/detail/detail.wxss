@@ -1,1 +1,42 @@
 /* detail.wxss */
+.list-border {
+  border-radius: 8px;
+  background-color: white;
+  margin: 10px 10px 10px 10px;
+  padding: 10px
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.view-line{
+ width: 100%;
+ height: 1px;
+ background-color: gainsboro;
+}
+
+.text-weight {
+  font-weight: bold;
+}
+
+.comment {
+  margin-top: 5px;
+}
+
+.comment-line {
+  padding-top: 10px;
+}
+
+.button {
+  background-color: #f39808;
+  color: white;
+  float: left;
+}
+
+.hide {
+  display: none;
+}
