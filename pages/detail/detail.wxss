@@ -40,3 +40,10 @@
 .hide {
   display: none;
 }
+
+.fix-bottom {
+  position:fixed;
+  bottom:0;
+  width:90%;
+  border: 1px solid #f39808
+}

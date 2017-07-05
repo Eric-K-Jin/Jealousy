@@ -2,20 +2,8 @@
 <view class="list-border">
     <text>{{detail}}</text>
 </view>
-<view class="list-border">
-  <text class="text-weight">评论({{count}})</text>
-  <view class="view-line"></view>
-  <form>
-  <view wx:if="{{session == 1}}" class="comment" style="display: flex;">
-      <input placeholder="我要吐槽..." auto-focus style="width: 80%" bindinput="contentInput"/>
-      <button size="mini" class="button" bindtap="commentArticle" form-type="reset">评论</button>
-  </view>
-  <view class="comment" wx:else>
-    <button size="mini" class="button">登录</button>
-  </view>
-  </form>
-</view>
-<scroll-view scroll-y="true" style="height: 200vh;" bindscrolltolower="loadMore">
+
+<scroll-view scroll-y="true" style="height: 80vh;" bindscrolltolower="loadMore">
 <view wx:if="{{session == 1}}" class="list-border {{hide}}">
   <block wx:for="{{comments}}" wx:key="commentList">
   <view style="display: flex">
@@ -36,6 +24,20 @@
 <view>
   <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
   <icon type="waiting" size="45"/><text>玩命的加载中...</text></view>
-  <view wx:else style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;"><text>没有更多内容了</text></view>
+  <view wx:else style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;margin-bottom:25%;">
+    <text>没有更多内容了</text>
+  </view>
 </view>
 </scroll-view>
+
+<view class="list-border fix-bottom">
+  <form>
+  <view wx:if="{{session == 1}}" class="comment" style="display: flex;">
+      <input placeholder="我要吐槽..." auto-focus style="width: 77%" bindinput="contentInput"/>
+      <button size="mini" class="button" bindtap="commentArticle" form-type="reset">评论</button>
+  </view>
+  <view class="comment" wx:else>
+    <button size="mini" class="button">登录</button>
+  </view>
+  </form>
+</view>

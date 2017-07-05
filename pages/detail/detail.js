@@ -45,7 +45,9 @@ Page({
     wx.BaaS.getRecordList(objects).then((res) => {
       let count = res.data.meta.total_count
       if (count > 0) {
-        that.setData({count: count, hide: "", comments: res.data.objects, page: page + 1, size: limit})
+        that.setData({count: count, hide: "", comments: res.data.objects, page: page + 1, size: limit, hasMore: (count <= limit) ? false : true})
+      } else {
+        that.setData({page: page, size:limit, hasMore: false})
       }
     }, (err) => {
       wx.showToast({
@@ -60,13 +62,6 @@ Page({
       fail: function() {
         that.setData({session: 2})
       }
-    })
-
-    wx.getSystemInfo({
-      success: function(res) {
-        console.log(res.windowHeight)
-        that.setData({windowHeight: res.windowHeight})
-      },
     })
   },
 
@@ -175,7 +170,7 @@ Page({
       let total = res.data.meta.total_count
       let obj = this.data.comments
       this.setData({
-        list: obj.concat(res.data.objects),
+        comments: obj.concat(res.data.objects),
         hasMore: (this.data.page * limit >= total) ? false : true,
         page: this.data.page + 1
       })
