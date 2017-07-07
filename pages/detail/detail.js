@@ -277,7 +277,7 @@ Page({
   preview: function () {
     let _this = this
     wx.previewImage({
-      urls: [_this.data.src],
+      urls: [_this.data.image],
     })
   }
 })
