@@ -1,0 +1,6 @@
+<!--notice.wxml-->
+<view class="">
+  <view style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+    <text>没有更多内容了</text>
+  </view>
+</view>

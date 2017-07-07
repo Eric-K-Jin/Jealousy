@@ -1,0 +1,33 @@
+/* user.wxss */
+.avatar {
+  width: 115rpx;
+  height: 115rpx;
+  margin: 40rpx;
+  border: 2px solid #f39808;
+  border-radius: 50%;
+}
+
+.icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.button {
+  background-color: #f39808;
+  color: white;
+  float: left;
+}
+
+.view-line{
+ width: 100%;
+ height: 1px;
+ background-color: gainsboro;
+ margin: 10rpx 0 20rpx 0;
+}
+
+.list-border {
+  border-radius: 8px;
+  background-color: white;
+  margin: 10px 10px 10px 10px;
+  padding: 10px
+}

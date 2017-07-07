@@ -1,0 +1,23 @@
+<!--publish.wxml-->
+<view class="header">
+  发布笑料
+</view>
+<view class="list-border">
+  <text>内容：</text>
+  <view class="view-line"></view>
+  <textarea maxlength="200" auto-focus placeholder="我的笑料" bindinput="contentInput" />
+</view>
+<view class="list-border">
+  <text>图片：</text>
+  <view class="view-line"></view>
+  <view class="upload">
+    <image src="/images/upload.png" class="image" catchtap="chooseImageTap" style="width:100rpx; height:100rpx;"></image>
+    <view wx:if="{{src}}">
+      <image src="{{src}}" catchtap="preview" bindload="imageLoad" style="width: {{imgwidth}}px; height: {{imgheight}}px"></image>
+      <image src="/images/delete.png" class="delete" catchtap="deleteImage"></image>
+    </view>
+  </view>
+</view>
+<view>
+  <button class="button" bindtap="publishArticle"> 立即发布 </button>
+</view>

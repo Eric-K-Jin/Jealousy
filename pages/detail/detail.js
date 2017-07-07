@@ -1,5 +1,6 @@
 // detail.js
-var id, comments, page = 1, limit = 5;
+let imageUtil = require("../../utils/util")
+var id, comments, page = 1, limit = 10;
 Page({
 
   /**
@@ -9,7 +10,8 @@ Page({
     count: 0,
     content: '',
     hide: 'hide',
-    hasMore: true
+    hasMore: true,
+    session: 1
   },
 
   /**
@@ -27,10 +29,11 @@ Page({
     };
     wx.BaaS.getRecord(objects).then((res) => {
       // console.log(res)
-      that.setData({detail: res.data.content})
+      that.setData({detail: res.data.content, image: res.data.image})
     }, (err) => {
       wx.showToast({
         title: '系统错误',
+        image: '/images/error.png'
       })
     });
 
@@ -52,17 +55,14 @@ Page({
     }, (err) => {
       wx.showToast({
         title: '系统错误',
+        image: '/images/error.png'
       })
     })
 
-    wx.checkSession({
-      success: function() {
-        that.setData({session: 1})
-      },
-      fail: function() {
-        that.setData({session: 2})
-      }
-    })
+    var info = wx.BaaS.storage.get('userinfo')
+    if (!info.nickName || !info.avatarUrl) {
+      that.setData({session: 2})
+    }
   },
 
   /**
@@ -122,15 +122,22 @@ Page({
   },
 
   commentArticle: function() {
-    let tableID = 221
     let that = this
+    if (that.data.content == "" || that.data.content == undefined || that.data.content == null) {
+      wx.showToast({
+        title: '很抱歉，评论内容不能为空',
+        image: '/images/error.png'
+      })
+      return
+    }
+    let tableID = 221
     let count = that.data.count
-    let userInfo = wx.BaaS.storage.get('userInfo')
+    let userInfo = wx.BaaS.storage.get('userinfo')
     let data = {
       article_id: wx.BaaS.storage.get("article_id"),
       content: that.data.content,
-      wx_name: userInfo.nickname,
-      wx_avatar: userInfo.avatar
+      wx_name: userInfo.nickName,
+      wx_avatar: userInfo.avatarUrl
     }
     let objects = {
       tableID,
@@ -138,9 +145,52 @@ Page({
     }
     wx.BaaS.createRecord(objects).then((res) => {
       that.setData({count: count + 1, hide: ""})
+
+      objects = {
+        tableID: 216,
+        recordID: data.article_id,
+        data: {
+          comments: that.data.count
+        }
+      }
+      wx.BaaS.updateRecord(objects).then((res) => {
+        // success
+
+      }, (err) => {
+        // err
+        wx.showToast({
+          title: '系统错误',
+          image: '/images/error.png'
+        })
+      });
+
+      let limit = this.data.size
+      let offset = 0
+      objects = {
+        tableID: 221,
+        order_by: '-created_at',
+        article_id: wx.BaaS.storage.get('article_id'),
+        limit,
+        offset
+      }
+      wx.BaaS.getRecordList(objects).then((res) => {
+        let total = res.data.meta.total_count
+        // success
+        this.setData({
+          comments: res.data.objects,
+          page: 2
+        })
+      }, (err) => {
+        // err
+        wx.showToast({
+          title: '系统出错',
+          image: '/images/error.png'
+        })
+      })
     }, (err) => {
       wx.showToast({
         title: '系统错误',
+        image: '/images/error.png'
       })
     })
   },
@@ -178,7 +228,56 @@ Page({
       // err
       wx.showToast({
         title: '系统出错',
+        image: '/images/error.png'
       })
     })
   },
+
+  authorize: function() {
+    var that = this;
+    wx.openSetting({
+      success: function(data) {
+        if(data) {
+            if (data.authSetting["scope.userInfo"] == true) {
+              wx.getUserInfo({
+                withCredentials: false,
+                success: function(data) {
+                  wx.setStorageSync('ifx_baas_userinfo', data.userInfo)
+                  that.setData({hide: "", session: 1})
+                },
+                fail: function() {
+                  wx.showToast({
+                    title: '授权失败',
+                    image: '/images/error.png'
+                  })
+                }                
+              });
+            }
+        } 
+      },
+      fail: function() {
+        wx.showToast({
+          title: '授权失败',
+          image: '/images/error.png'
+        })
+      } 
+    })
+  },
+
+  imageLoad: function (e) {
+    var _this = this;
+    //获取图片的原始宽度和高度  
+    let originalWidth = e.detail.width;
+    let originalHeight = e.detail.height;
+    let sysInfo = wx.getSystemInfoSync();
+    let imageSize = imageUtil.imageZoomHeightUtil(originalWidth, originalHeight, sysInfo.windowWidth*0.88);
+    _this.setData({ imgwidth: imageSize.imageWidth, imgheight: imageSize.imageHeight });
+  },
+
+  preview: function () {
+    let _this = this
+    wx.previewImage({
+      urls: [_this.data.src],
+    })
+  }
 })

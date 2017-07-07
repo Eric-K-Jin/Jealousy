@@ -7,7 +7,7 @@ App({
     wx.BaaS.init('06eaaf834dc546a87c1a')
 
     wx.BaaS.login().then((res) => {
-      wx.BaaS.storage.set('userInfo', {nickname: res.nickName, avatar: res.avatarUrl})
+      // wx.BaaS.storage.set('userInfo', {nickname: res.nickName, avatar: res.avatarUrl})
     }, (err) => {
       wx.showToast({
         title: '系统错误',

@@ -5,7 +5,12 @@
     "pages/logs/logs",
     "pages/upload/upload",
     "pages/detail/detail",
-    "pages/comment/comment"
+    "pages/comment/comment",
+    "pages/user/user",
+    "pages/article/article",
+    "pages/publish/publish",
+    "pages/feedback/feedback",
+    "pages/notice/notice"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,13 +33,13 @@
       {
         "selectedIconPath": "images/comment.png",
         "iconPath": "images/comment.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/comment/comment",
         "text": "热评"
       },
       {
         "selectedIconPath": "images/user.png",
         "iconPath": "images/user.png",
-        "pagePath": "pages/upload/upload",
+        "pagePath": "pages/user/user",
         "text": "我的"
       }
     ]

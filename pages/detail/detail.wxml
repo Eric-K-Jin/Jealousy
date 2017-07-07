@@ -1,9 +1,12 @@
 <!--detail.wxml-->
 <view class="list-border">
     <text>{{detail}}</text>
+    <view class="" wx:if="{{image}}">
+      <image src="{{image}}" catchtap="preview" bindload="imageLoad" style="width: {{imgwidth}}px; height: {{imgheight}}px"></image>
+    </view>
 </view>
 
-<scroll-view scroll-y="true" style="height: 80vh;" bindscrolltolower="loadMore">
+<scroll-view scroll-y="true" style="height: auto;" bindscrolltolower="loadMore">
 <view wx:if="{{session == 1}}" class="list-border {{hide}}">
   <block wx:for="{{comments}}" wx:key="commentList">
   <view style="display: flex">
@@ -37,7 +40,7 @@
       <button size="mini" class="button" bindtap="commentArticle" form-type="reset">评论</button>
   </view>
   <view class="comment" wx:else>
-    <button size="mini" class="button">登录</button>
+    <button size="mini" class="button" bindtap="authorize">登录</button>
   </view>
   </form>
 </view>

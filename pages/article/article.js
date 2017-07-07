@@ -1,4 +1,4 @@
-// list.js
+// article.js
 let imageUtil = require("../../utils/util")
 var list, page, limit
 Page({
@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // page: 1,
-    // size: 5,
     imgwidth: 0,
     imgheight: 0,
     hasMore: true,
@@ -81,12 +79,13 @@ Page({
     this.setData({
       hasMore: false
     })
-    
+
     let limit = this.data.size
     let offset = limit * (this.data.page - 1)
     let objects = {
       tableID: 216,
       order_by: '-created_at',
+      created_by: wx.BaaS.storage.get('uid'),
       limit,
       offset
     }
@@ -94,10 +93,10 @@ Page({
       // success
       let total = res.data.meta.total_count
       let obj = this.data.list
-      this.setData({ 
-        list: obj.concat(res.data.objects), 
-        hasMore: (this.data.page * limit >= total) ? false : true, 
-        hasRefesh: false, 
+      this.setData({
+        list: obj.concat(res.data.objects),
+        hasMore: (this.data.page * limit >= total) ? false : true,
+        hasRefesh: false,
         page: this.data.page + 1
       })
     }, (err) => {
@@ -119,6 +118,7 @@ Page({
     let objects = {
       tableID: 216,
       order_by: '-created_at',
+      created_by: wx.BaaS.storage.get('uid'),
       limit,
       offset
     }
@@ -147,17 +147,18 @@ Page({
     let originalWidth = e.detail.width;
     let originalHeight = e.detail.height;
     let sysInfo = wx.getSystemInfoSync();
-    let imageSize = imageUtil.imageZoomHeightUtil(originalWidth, originalHeight, sysInfo.windowWidth*0.89);
+    let imageSize = imageUtil.imageZoomHeightUtil(originalWidth, originalHeight, sysInfo.windowWidth * 0.89);
     _this.setData({ imgwidth: imageSize.imageWidth, imgheight: imageSize.imageHeight });
   }
 })
 
 limit = 5
 let offset = 0
-let objects = { 
+let objects = {
   tableID: 216,
   limit,
   offset,
+  created_by: wx.BaaS.storage.get('uid'),
   order_by: '-created_at'
 }
 wx.BaaS.getRecordList(objects).then((res) => {

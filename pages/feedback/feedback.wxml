@@ -1,0 +1,29 @@
+<!--feedback.wxml-->
+<view class="header">
+  联系反馈
+</view>
+<view class="list-border">
+  <view class="view-margin">
+    <text>您的称呼：</text>
+    <view class="view-line"></view>
+    <input maxlength="10" auto-focus placeholder="点击输入您的称呼" class="input-margin" bindinput="nameInput" />
+  </view>
+  <view class="view-margin">
+    <text>您的留言：</text>
+    <view class="view-line"></view>
+    <textarea maxlength="200" auto-focus placeholder="点击输入您的留言"  class="input-margin" bindinput="contentInput" />
+  </view>
+  <view class="view-margin">
+    <text>您的联系方式：</text>
+    <view class="view-line"></view>
+    <input maxlength="20" auto-focus placeholder="点击输入您的联系方式" class="input-margin" bindinput="contactInput" />
+  </view>
+  <view>
+    <text>您的QQ/微信：</text>
+    <view class="view-line"></view>
+    <input maxlength="20" auto-focus placeholder="点击输入您的QQ/微信" class="input-margin" bindinput="qqorwechatInput" />
+  </view>
+</view>
+<view>
+  <button class="button" bindtap="submitFeedback"> 立即提交 </button>
+</view>

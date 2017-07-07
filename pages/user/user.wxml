@@ -1,0 +1,70 @@
+<!--user.wxml-->
+<view style="display: flex">
+  <view>
+    <image src="{{avatar}}" class="avatar" style="width:{{imgwidth}}px; height:{{imgheight }}px;"></image>
+  </view>
+  <view style="margin: 70rpx 0 0 120rpx" wx:if="{{loginStatus == 0}}">
+    <button size="mini" class="button" bindtap="authorize">立即登录</button>
+  </view>
+  <view style="margin: 70rpx 0 0 40rpx" wx:else>
+    <text style="float: left">{{nickname}}</text>
+  </view>
+</view>
+<view class="list-border">
+  <view style="display: flex" bindtap="publish">
+    <view>
+      <image src="/images/publish.png" class="icon"></image>
+    </view>
+    <view style="margin: 7rpx 0 0 10rpx">
+      <text>发布笑料</text>
+    </view>
+    <view style="margin: 5rpx 0 0 65%">
+      <text>></text>
+    </view>
+  </view>
+
+  <view class="view-line"></view>
+
+  <view style="display: flex" bindtap="myArticle">
+    <view>
+      <image src="/images/article.png" class="icon"></image>
+    </view>
+    <view style="margin: 7rpx 0 0 10rpx">
+      <text>我的笑料</text>
+    </view>
+    <view style="margin: 5rpx 0 0 65%">
+      <text>></text>
+    </view>
+  </view>
+
+  <view class="view-line"></view>
+
+  <view style="display: flex" bindtap="feedback">
+    <view>
+      <image src="/images/feedback.png" class="icon"></image>
+    </view>
+    <view style="margin: 7rpx 0 0 10rpx">
+      <text>联系反馈</text>
+    </view>
+    <view style="margin: 5rpx 0 0 65%">
+      <text>></text>
+    </view>
+  </view>
+  
+  <view class="view-line"></view>
+  
+  <view style="display: flex" bindtap="notice">
+    <view>
+      <image src="/images/notice.png" class="icon"></image>
+    </view>
+    <view style="margin: 7rpx 0 0 10rpx">
+      <text>消息中心</text>
+    </view>
+    <view style="margin: 5rpx 0 0 65%">
+      <text>></text>
+    </view>
+  </view>
+</view>
+<view style="display:flex; align-items: center; flex-direction: column;margin-top:100px;color:#8a8a8a;font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif">
+  <text>社会社会</text>
+</view>
