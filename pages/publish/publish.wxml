@@ -11,7 +11,7 @@
   <text>图片：</text>
   <view class="view-line"></view>
   <view class="upload">
-    <image src="/images/upload.png" class="image" catchtap="chooseImageTap" style="width:100rpx; height:100rpx;"></image>
+    <image src="/images/upload.png" class="image" catchtap="chooseWxImage" style="width:100rpx; height:100rpx;"></image>
     <view wx:if="{{src}}">
       <image src="{{src}}" catchtap="preview" bindload="imageLoad" style="width: {{imgwidth}}px; height: {{imgheight}}px"></image>
       <image src="/images/delete.png" class="delete" catchtap="deleteImage"></image>

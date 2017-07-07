@@ -36,7 +36,7 @@
 <view class="list-border fix-bottom">
   <form>
   <view wx:if="{{session == 1}}" class="comment" style="display: flex;">
-      <input placeholder="我要吐槽..." auto-focus style="width: 77%" bindinput="contentInput"/>
+      <input placeholder="我要吐槽..." style="width: 77%" bindinput="contentInput"/>
       <button size="mini" class="button" bindtap="commentArticle" form-type="reset">评论</button>
   </view>
   <view class="comment" wx:else>
