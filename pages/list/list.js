@@ -11,7 +11,7 @@ Page({
     // size: 5,
     imgwidth: 0,
     imgheight: 0,
-    hasMore: true,
+    hasMore: false,
     hasRefesh: false
   },
 
@@ -19,21 +19,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ list: list, page: page, size: limit })
+    let limit = 5
+    let offset = 0
+    let objects = {
+      tableID: 216,
+      limit,
+      offset,
+      order_by: '-created_at'
+    }
+    wx.BaaS.getRecordList(objects).then((res) => {
+      // success
+      // page = 2
+      // list = res.data.objects
+      this.setData({ list: res.data.objects, page: 2, size: limit, hasMore: true })
+    }, (err) => {
+      // err
+      wx.showToast({
+        title: '系统出错',
+        image: '/images/error.png'
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
@@ -150,24 +169,4 @@ Page({
     let imageSize = imageUtil.imageZoomHeightUtil(originalWidth, originalHeight, sysInfo.windowWidth*0.89);
     _this.setData({ imgwidth: imageSize.imageWidth, imgheight: imageSize.imageHeight });
   }
-})
-
-limit = 5
-let offset = 0
-let objects = { 
-  tableID: 216,
-  limit,
-  offset,
-  order_by: '-created_at'
-}
-wx.BaaS.getRecordList(objects).then((res) => {
-  // success
-  page = 2
-  list = res.data.objects
-}, (err) => {
-  // err
-  wx.showToast({
-    title: '系统出错',
-    image: '/images/error.png'
-  })
 })
