@@ -10,6 +10,9 @@
 <navigator url="../detail/detail?id={{item.id}}" hover-class="navigator-hover">
     <view class="list-border">
         <text class="content-overflow">{{item.content}}</text>
+        <view class="" wx:if="{{item.image}}">
+          <image src="{{item.image}}" bindload="imageLoad" style="width: {{imgwidth}}px; height: {{imgheight}}px"></image>
+        </view>
     </view>
 </navigator>
 </block>

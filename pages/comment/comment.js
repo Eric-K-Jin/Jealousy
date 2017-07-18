@@ -1,4 +1,5 @@
 // comment.js
+let imageUtil = require("../../utils/util")
 var list, page = 1, limit = 5
 Page({
 
@@ -6,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgwidth: 0,
+    imgheight: 0,
     hasMore: true,
     hasRefesh: false
   },
@@ -140,6 +143,16 @@ Page({
         image: '/images/error.png'
       })
     })
+  },
+
+  imageLoad: function (e) {
+    var _this = this;
+    //获取图片的原始宽度和高度  
+    let originalWidth = e.detail.width;
+    let originalHeight = e.detail.height;
+    let sysInfo = wx.getSystemInfoSync();
+    let imageSize = imageUtil.imageZoomHeightUtil(originalWidth, originalHeight, sysInfo.windowWidth * 0.89);
+    _this.setData({ imgwidth: imageSize.imageWidth, imgheight: imageSize.imageHeight });
   }
 })
 

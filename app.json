@@ -1,9 +1,6 @@
 {
   "pages": [
     "pages/list/list",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/upload/upload",
     "pages/detail/detail",
     "pages/comment/comment",
     "pages/user/user",
